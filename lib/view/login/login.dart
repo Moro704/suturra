@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sutura/view/homme/core/appcolor.dart';
-import 'package:sutura/view/homme/hommeApp.dart';
+import 'package:sutura/core/appcolor.dart';
+import 'package:sutura/service/Google_service.dart';
+
+import 'package:sutura/service/SingIn_service.dart';
+
 import 'package:sutura/view/login/singUp.dart';
 
 class Login extends StatefulWidget {
@@ -50,15 +53,20 @@ class _LoginState extends State<Login> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(color: Colors.white),
-                              child: Center(
-                                child: Image.asset(
-                                  "assets/google.png",
-                                  width: 34,
-                                  height: 34,
+                            GestureDetector(
+                              onTap: () {
+                                GoogleService().signInWithGoogle();
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(color: Colors.white),
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/google.png",
+                                    width: 34,
+                                    height: 34,
+                                  ),
                                 ),
                               ),
                             ),
@@ -100,9 +108,8 @@ class _LoginState extends State<Login> {
               width: width * 0.7,
               height: height * 0.45,
               decoration: BoxDecoration(
-               color:  Appcolor.PositionedColor,
-               borderRadius: BorderRadius.circular(18)
-
+                color: Appcolor.PositionedColor,
+                borderRadius: BorderRadius.circular(18),
               ),
               child: SingleChildScrollView(
                 child: Form(
@@ -165,12 +172,16 @@ class _LoginState extends State<Login> {
                           ),
 
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Hommeapp(),
-                              ),
+                            SinginService().singIn(
+                              controllerEmail.text,
+                              controllerPassword.text,
                             );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => Hommeapp(),
+                            //   ),
+                            // );
                           },
                           child: Text("Connectez"),
                         ),
