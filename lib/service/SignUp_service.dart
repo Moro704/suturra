@@ -53,12 +53,15 @@ class SignupService {
 
   // Upload image
   Future<String> uploadImageUser(xfile) async {
+    
+
     Reference ref = FirebaseStorage.instance
         .ref()
-        .child("users_images/image_user_${DateTime.now()}.png");
+        .child("users_images/image_user/${DateTime.now().toIso8601String()}");
 
     UploadTask uploadTask = ref.putFile(xfile);
     TaskSnapshot snapshot = await uploadTask;
     return await snapshot.ref.getDownloadURL();
   }
+   
 }

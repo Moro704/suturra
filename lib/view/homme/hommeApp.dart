@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:sutura/core/appcolor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:sutura/view/My/my_screen.dart';
-import 'package:sutura/view/add/add_sreen.dart';
+import 'package:sutura/view/favori/favoris.dart';
+
 import 'package:sutura/view/homme/homme_screen.dart';
 import 'package:sutura/view/shopin/shopping_screen.dart';
 
@@ -14,12 +17,13 @@ class Hommeapp extends StatefulWidget {
 }
 
 class _HommeappState extends State<Hommeapp> {
+  
   int index = 0;
   void select(int indexselect) {
     if (indexselect == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>AddSreen()),
+        MaterialPageRoute(builder: (context) =>PanierScreen()),
       );
     } else {
       setState(() {
@@ -30,35 +34,40 @@ class _HommeappState extends State<Hommeapp> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       // appBar: AppBar(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(6.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.home),
-                label: "Home",
+                label: "Accueil",
               ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.circlePlus),
-                label: "Add",
-              ),
+              // BottomNavigationBarItem(
+              //   icon: FaIcon(FontAwesomeIcons.circlePlus),
+              //   label: "Add",
+              // ),
               BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.bagShopping),
-                label: "Home",
+                label: "Panier",
               ),
               BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.circleUser),
-                label: "Home",
+                icon: FaIcon(FontAwesomeIcons.heart),                               
+                label: "Favoris",
+              ),
+              BottomNavigationBarItem(
+                icon: FaIcon(FontAwesomeIcons.circleUser),                               
+                label: "Moi",
               ),
             ],
             currentIndex: index,
             onTap: select,
             enableFeedback: false,
-            elevation: 10,
+            elevation: 8,
             backgroundColor: Appcolor.Secondecolor,
 
             // fixedColor: const Color.fromARGB(255, 247, 246, 246),
@@ -68,7 +77,7 @@ class _HommeappState extends State<Hommeapp> {
           ),
         ),
       ),
-      body: [HommeScreen(), ShoppingScreen(), MyScreen()][index],
+      body: [HommeScreen(), PanierScreen(), Favoris(), MyScreen()][index],
     );
   }
 }

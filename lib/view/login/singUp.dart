@@ -216,10 +216,10 @@ final SignupService signupService = SignupService();
       );
 
       // Redirige vers Login
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => Login()),
+      // );
     } else {
       // Échec
       ScaffoldMessenger.of(context).showSnackBar(

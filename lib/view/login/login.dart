@@ -54,8 +54,8 @@ class _LoginState extends State<Login> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                GoogleService().signInWithGoogle();
+                              onTap: () async {
+                                await GoogleService().signInWithGoogle();
                               },
                               child: Container(
                                 width: 50,
@@ -171,8 +171,8 @@ class _LoginState extends State<Login> {
                             shape: RoundedRectangleBorder(),
                           ),
 
-                          onPressed: () {
-                            SinginService().singIn(
+                          onPressed: () async {
+                            await SinginService().singIn(
                               controllerEmail.text,
                               controllerPassword.text,
                             );

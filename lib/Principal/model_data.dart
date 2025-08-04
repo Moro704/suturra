@@ -12,6 +12,7 @@ class ModelData {
   String? categoryArticle;
   String? imageUrl;
   Timestamp? timestamp;
+final List<String> searchKeywords;
 
   // Constructeur modifié avec paramètres nommés optionnels
   ModelData({
@@ -25,12 +26,14 @@ class ModelData {
     this.categoryArticle,
     this.imageUrl,
     this.timestamp,
+     required this.searchKeywords,
   });
 
   // Méthode modelMap() corrigée
   Map<String, dynamic> modelMap() {
     return {
       // Ne pas inclure id ici pour les nouveaux documents
+      "id": this.id, // Laisser id pour la mise à jour
       "userId": this.userId,
       "userName": this.userName,
       "userImage": this.userImage,
@@ -40,13 +43,14 @@ class ModelData {
       "categoryArticle": this.categoryArticle,
       "imageUrl": this.imageUrl,
       "timestamp": this.timestamp ?? FieldValue.serverTimestamp(),
+       'searchKeywords': searchKeywords,
     };
   }
 
   factory ModelData.fromMap(Map<String, dynamic> data) {
     return ModelData(
       id: data['id'],
-      userId: data['idUser'],
+      userId: data['userId'],
       userName: data['userName'],
       userImage: data['userImage'],
       nomArticle: data['nomArticle'],
@@ -55,6 +59,7 @@ class ModelData {
       categoryArticle: data['categoryArticle'],
       imageUrl: data['imageUrl'],
       timestamp: data['timestamp'],
+      searchKeywords: List<String>.from(data['searchKeywords'] ?? []),
     );
   }
 }

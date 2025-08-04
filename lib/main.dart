@@ -2,8 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sutura/Principal/choix.dart';
-import 'package:sutura/service/SignUp_service.dart';
-import 'package:sutura/view/login/login.dart';
+import 'package:sutura/service/panier_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -17,7 +16,10 @@ void main() async {
       storageBucket: "flutter-87598.appspot.com",
     ),
   );
- 
+//  await FirebaseAppCheck.instance.activate(
+//     androidProvider: AndroidProvider.debug,
+//     // Pour la production : AndroidProvider.playIntegrity
+//   );
   runApp(
     MultiProvider(
       providers: [
@@ -26,6 +28,8 @@ void main() async {
           create: (_) => FirebaseAuth.instance.authStateChanges(),
           initialData: null, // L'utilisateur sera `null` si non connecté
         ),
+        ChangeNotifierProvider(create: (_) => PanierService()),
+    
       ],
       child: const MyApp(),
     ),
